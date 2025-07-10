@@ -1,0 +1,44 @@
+.body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(19, 19, 19);
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px;
+    background-color: rgb(26, 26, 26);
+    gap: 20px;
+}
+
+.container > h3{
+    font-size: 30px;
+}
+
+.type{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.type > input {
+    background-color: black;
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 7px;
+}
+
+.click > input {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: orangered;
+}
