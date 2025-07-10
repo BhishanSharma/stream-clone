@@ -4,6 +4,7 @@ import Home from './pages/Home/Home'
 import Login from './pages/Auth/Login'
 import Signup from './pages/Auth/Signup'
 import VideoPlayer from './pages/VideoPlayer/VideoPlayer'
+import UploadPage from './pages/UploadPage/UploadPage'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
           <Route path='/login' element={<Login />}></Route>
           <Route path='/signup' element={<Signup />}></Route>
           <Route path="/watch/:id" element={<VideoPlayer />} />
+          <Route path="/upload" element={<UploadPage />} />
         </Routes>
       </Router>
     </>

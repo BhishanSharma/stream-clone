@@ -17,4 +17,10 @@
     height: 4vh;
     border: 1px solid white;
     border-radius: 50%;
+    overflow: hidden;
+}
+
+.dp > img {
+    width: 100%;
+    height: 100%;
 }
