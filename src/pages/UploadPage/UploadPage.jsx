@@ -26,96 +26,139 @@ function UploadPage() {
     setTitle('');
     setVideoFile(null);
     setImageFile(null);
-    e.target.reset(); // resets file inputs
+    e.target.reset();
   };
 
   return (
     <div style={{ backgroundColor: "#f9f9f9", minHeight: "100vh" }}>
       <Header />
+
       <div
         style={{
-          maxWidth: "600px",
+          maxWidth: "720px",
           margin: "40px auto",
           backgroundColor: "#fff",
-          padding: "20px",
-          borderRadius: "8px",
-          boxShadow: "0 1px 3px rgba(0,0,0,0.1)"
+          padding: "30px",
+          borderRadius: "10px",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
         }}
       >
-        <h2 style={{ marginBottom: "20px" }}>Upload Video</h2>
+        <h2
+          style={{
+            marginBottom: "30px",
+            fontSize: "24px",
+            borderBottom: "1px solid #eee",
+            paddingBottom: "10px",
+            color: "#202020"
+          }}
+        >
+          Upload Your Video
+        </h2>
 
         <form onSubmit={handleUpload}>
-          {/* Title Input */}
-          <div style={{ marginBottom: "15px" }}>
-            <label style={{ display: "block", marginBottom: "5px" }}>Title</label>
+
+          {/* Title Field */}
+          <div style={{ marginBottom: "25px" }}>
+            <label style={labelStyle}>Title</label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Enter video title"
-              style={{
-                width: "100%",
-                padding: "10px",
-                borderRadius: "4px",
-                border: "1px solid #ccc"
-              }}
+              placeholder="e.g. My First Vlog"
+              style={inputStyle}
             />
           </div>
 
-          {/* Thumbnail Input */}
-          <div style={{ marginBottom: "20px" }}>
-            <label style={{ display: "block", marginBottom: "5px" }}>Thumbnail</label>
+          {/* Thumbnail Upload */}
+          <div style={{ marginBottom: "25px" }}>
+            <label style={labelStyle}>Thumbnail</label>
             <input
               type="file"
               accept="image/*"
               onChange={(e) => setImageFile(e.target.files[0])}
-              style={{ display: "block", width: "100%" }}
+              style={fileInputStyle}
             />
             {imageFile && (
-              <img
-                src={URL.createObjectURL(imageFile)}
-                alt="Thumbnail Preview"
+              <div
                 style={{
-                  width: "100%",
-                  maxHeight: "200px",
-                  objectFit: "cover",
-                  marginTop: "10px",
-                  borderRadius: "4px"
+                  marginTop: "15px",
+                  border: "1px solid #ddd",
+                  borderRadius: "6px",
+                  overflow: "hidden",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
                 }}
-              />
+              >
+                <img
+                  src={URL.createObjectURL(imageFile)}
+                  alt="Thumbnail Preview"
+                  style={{
+                    width: "100%",
+                    height: "200px",
+                    objectFit: "cover"
+                  }}
+                />
+              </div>
             )}
           </div>
 
-          {/* Video File Input */}
-          <div style={{ marginBottom: "20px" }}>
-            <label style={{ display: "block", marginBottom: "5px" }}>Video File</label>
+          {/* Video File Upload */}
+          <div style={{ marginBottom: "25px" }}>
+            <label style={labelStyle}>Video File</label>
             <input
               type="file"
               accept="video/*"
               onChange={(e) => setVideoFile(e.target.files[0])}
-              style={{ display: "block", width: "100%" }}
+              style={fileInputStyle}
             />
           </div>
 
-          {/* Submit Button */}
+          {/* Upload Button */}
           <button
             type="submit"
             style={{
-              padding: "10px 20px",
+              width: "100%",
+              padding: "12px 20px",
               backgroundColor: "#FF0000",
               color: "#fff",
+              fontSize: "16px",
               border: "none",
-              borderRadius: "4px",
+              borderRadius: "6px",
               fontWeight: "bold",
               cursor: "pointer",
+              transition: "background 0.2s",
             }}
+            onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#cc0000"}
+            onMouseOut={(e) => e.currentTarget.style.backgroundColor = "#FF0000"}
           >
-            Upload
+            Upload Video
           </button>
         </form>
       </div>
     </div>
   );
 }
+
+const labelStyle = {
+  display: "block",
+  marginBottom: "8px",
+  fontWeight: "500",
+  color: "#333",
+};
+
+const inputStyle = {
+  width: "100%",
+  padding: "10px 12px",
+  border: "1px solid #ccc",
+  borderRadius: "4px",
+  fontSize: "15px",
+};
+
+const fileInputStyle = {
+  width: "100%",
+  padding: "8px",
+  backgroundColor: "#f9f9f9",
+  borderRadius: "4px",
+  border: "1px solid #ccc",
+};
 
 export default UploadPage;
