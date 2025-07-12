@@ -13,32 +13,32 @@ function Sidebar() {
       </div>
       <div
         className="menu-item"
-        onClick={() => alert("Subscriptions coming soon!")}
+        onClick={() => navigate("/subscriptions")}
       >
         Subscriptions
       </div>
       <hr />
       <div
         className="menu-item"
-        onClick={() => alert("History page coming soon!")}
+        onClick={() => navigate("/history")}
       >
         History
       </div>
       <div
         className="menu-item"
-        onClick={() => alert("Playlists coming soon!")}
+        onClick={() => navigate("/playlists")}
       >
         Playlists
       </div>
       <div
         className="menu-item"
-        onClick={() => alert("Playlists coming soon!")}
+        onClick={() => navigate("/yourvideos")}
       >
         Your videos
       </div>
       <div
         className="menu-item"
-        onClick={() => alert("Playlists coming soon!")}
+        onClick={() => navigate("/likedvideos")}
       >
         Liked videos
       </div>

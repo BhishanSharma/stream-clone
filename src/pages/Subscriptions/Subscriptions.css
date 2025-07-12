@@ -1,0 +1,28 @@
+/* Subscriptions.css */
+
+.subscriptions-page {
+  padding: 30px;
+  background-color: #0f0f0f;
+  color: white;
+  min-height: 90vh;
+}
+
+.subscriptions-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.subscriptions-description {
+  font-size: 16px;
+  margin-bottom: 30px;
+  color: #aaa;
+}
+
+.subscriptions-placeholder {
+  padding: 50px;
+  text-align: center;
+  background-color: #1f1f1f;
+  border-radius: 10px;
+  font-size: 18px;
+  color: #ccc;
+}

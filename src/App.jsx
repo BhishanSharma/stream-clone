@@ -6,6 +6,11 @@ import Signup from './pages/Auth/Signup'
 import VideoPlayer from './pages/VideoPlayer/VideoPlayer'
 import UploadPage from './pages/UploadPage/UploadPage'
 import Header from './components/Header'
+import Subscriptions from './pages/Subscriptions/Subscriptions'
+import History from './pages/History/History'
+import Playlists from './pages/Playlists/Playlists'
+import YourVideos from './pages/YourVideos/YourVideos'
+import LikedVideos from './pages/LikedVideos/LikedVideos'
 
 function App() {
 
@@ -15,8 +20,15 @@ function App() {
         <Header/>
         <Routes>
           <Route path='/' element={<Home />}></Route>
+          <Route path='/subscriptions' element={<Subscriptions />}></Route>
+          <Route path='/history' element={<History />}></Route>
+          <Route path='/playlists' element={<Playlists />}></Route>
+          <Route path='/yourvideos' element={<YourVideos />}></Route>
+          <Route path='/likedvideos' element={<LikedVideos />}></Route>
+
           <Route path='/login' element={<Login />}></Route>
           <Route path='/signup' element={<Signup />}></Route>
+          
           <Route path="/watch/:id" element={<VideoPlayer />} />
           <Route path="/upload" element={<UploadPage />} />
         </Routes>
