@@ -45,37 +45,74 @@ function Signup() {
   const styles = {
     body: {
       minHeight: '100vh',
+      backgroundColor: '#fff',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#f5f5f5',
       fontFamily: 'Arial, sans-serif',
     },
     container: {
-      backgroundColor: '#fff',
-      padding: '32px',
-      borderRadius: '10px',
-      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
       width: '100%',
-      maxWidth: '400px',
+      maxWidth: '25vw',
+      margin: '35px 0'
     },
     header: {
       textAlign: 'center',
-      fontSize: '24px',
-      marginBottom: '20px',
+      fontSize: '36px',
+      marginBottom: '30px',
       color: '#333',
+      fontWeight: 200,
+    },
+    google: {
+      width: '100%',
+      display: 'flex',
+      padding: '10px 0',
+      alignItems: 'center',
+      gap: '10px',
+      textAlign: 'center',
+      justifyContent: 'center',
+      color: 'black',
+      fontSize: '20px',
+      fontWeight: '400',
+      border: '1px solid black',
+      borderRadius: '8px',
+      cursor: 'pointer'
+    },
+    span: {
+      display: 'flex',
+      width: '100%',
+      justifyContent: 'center',
+      color: 'black',
+      margin: '20px 0',
+      fontSize: '14px'
     },
     inputBox: {
       display: 'flex',
       flexDirection: 'column',
       gap: '12px',
     },
+    field: {
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '#f5f5f5',
+      borderRadius: '5px',
+      border: '1px solid white',
+      padding: '5px 5px',
+      gap: '5px'
+    },
+    label: {
+      margin: '0 4px',
+      fontSize: '15px',
+      color: 'black'
+    },
     input: {
-      padding: '10px',
+      padding: '5px 0px 3px 5px',
       borderRadius: '6px',
-      border: '1px solid #ccc',
-      fontSize: '14px',
+      fontSize: '18px',
       outline: 'none',
+      border: 'none',
+      backgroundColor: 'transparent',
+      color: 'black'
     },
     error: {
       color: 'red',
@@ -84,68 +121,125 @@ function Signup() {
       marginBottom: '4px',
     },
     button: {
-      padding: '10px',
-      backgroundColor: '#0073ff',
+      padding: '15px',
+      backgroundColor: '#000',
       color: '#fff',
       border: 'none',
       borderRadius: '6px',
       fontWeight: 'bold',
-      fontSize: '15px',
-      marginTop: '16px',
+      fontSize: '18px',
+      margin: '16px 0',
       cursor: 'pointer',
     },
     link: {
-      marginTop: '16px',
+      fontSize: '14px',
       display: 'block',
       textAlign: 'center',
-      fontSize: '14px',
       textDecoration: 'none',
       color: '#0073ff',
+    },
+    create: {
+      fontSize: '14px',
+      color: 'black',
+      marginTop: '16px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '2px'
+    },
+    avatarWrapper: {
+      display: 'flex',
+      justifyContent: 'center',
+      marginBottom: '20px',
+    },
+    avatarLabel: {
+      cursor: 'pointer',
+      display: 'inline-block',
+      borderRadius: '50%',
+      overflow: 'hidden',
+      width: '100px',
+      height: '100px',
+      border: '2px solid #ccc',
+      transition: 'border 0.3s',
+    },
+    avatarImage: {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
     },
   };
 
   return (
     <div style={styles.body}>
       <div style={styles.container}>
-        <h3 style={styles.header}>SZ</h3>
+        <h3 style={styles.header}>Sign up for SZ</h3>
+        <div style={styles.google}>
+          <svg class="svg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path fill="#4285f4" fill-opacity="1" fill-rule="evenodd" stroke="none" d="M17.64 9.2q-.002-.956-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"></path><path fill="#34a853" fill-opacity="1" fill-rule="evenodd" stroke="none" d="M9.003 18c2.43 0 4.467-.806 5.956-2.18l-2.909-2.26c-.806.54-1.836.86-3.047.86-2.344 0-4.328-1.584-5.036-3.711H.96v2.332C2.44 15.983 5.485 18 9.003 18"></path><path fill="#fbbc05" fill-opacity="1" fill-rule="evenodd" stroke="none" d="M3.964 10.712c-.18-.54-.282-1.117-.282-1.71 0-.593.102-1.17.282-1.71V4.96H.957C.347 6.175 0 7.55 0 9.002c0 1.452.348 2.827.957 4.042z"></path><path fill="#ea4335" fill-opacity="1" fill-rule="evenodd" stroke="none" d="M9.003 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.464.891 11.428 0 9.002 0 5.485 0 2.44 2.017.96 4.958L3.967 7.29c.708-2.127 2.692-3.71 5.036-3.71"></path></svg>
+          Continue with Google
+        </div>
+        <span style={styles.span}>or</span>
         <div style={styles.inputBox}>
-          <input
-            type='file'
-            name='avatar'
-            onChange={handleChange}
-            style={styles.input}
-          />
-          {errors.avatar && <p style={styles.error}>{errors.avatar}</p>}
+          <div style={styles.avatarWrapper}>
+            <input
+              type="file"
+              id="avatarInput"
+              name="avatar"
+              accept="image/*"
+              onChange={handleChange}
+              style={{ display: 'none' }}
+            />
+            <label htmlFor="avatarInput" style={styles.avatarLabel}>
+              <img
+                src={
+                  formData.avatar
+                    ? URL.createObjectURL(formData.avatar)
+                    : "https://www.w3schools.com/howto/img_avatar.png"
+                }
+                alt="Avatar"
+                style={styles.avatarImage}
+              />
+            </label>
+            {errors.avatar && <p style={styles.error}>{errors.avatar}</p>}
+          </div>
 
-          <input
-            type='text'
-            name='name'
-            placeholder='Enter name'
-            value={formData.name}
-            onChange={handleChange}
-            style={styles.input}
-          />
-          {errors.name && <p style={styles.error}>{errors.name}</p>}
+          <div className="name" style={styles.field} onMouseEnter={(e) => (e.currentTarget.style.border = "1px solid black")}
+            onMouseLeave={(e) => (e.currentTarget.style.border = "1px solid white")}>
+            <label htmlFor="name" style={styles.label}>NAME</label>
+            <input
+              type='name'
+              name='name'
+              value={formData.name}
+              onChange={handleChange}
+              style={styles.input}
+            />
+            {errors.name && <p style={styles.error}>{errors.name}</p>}
+          </div>
 
-          <input
-            type='email'
-            name='email'
-            placeholder='Enter email'
-            value={formData.email}
-            onChange={handleChange}
-            style={styles.input}
-          />
-          {errors.email && <p style={styles.error}>{errors.email}</p>}
+          <div className="email" style={styles.field} onMouseEnter={(e) => (e.currentTarget.style.border = "1px solid black")}
+            onMouseLeave={(e) => (e.currentTarget.style.border = "1px solid white")}>
+            <label htmlFor="email" style={styles.label}>EMAIL</label>
+            <input
+              type='email'
+              name='email'
+              value={formData.email}
+              onChange={handleChange}
+              style={styles.input}
+            />
+            {errors.email && <p style={styles.error}>{errors.email}</p>}
+          </div>
 
-          <input
-            type='password'
-            name='password'
-            placeholder='Enter password'
-            value={formData.password}
-            onChange={handleChange}
-            style={styles.input}
-          />
-          {errors.password && <p style={styles.error}>{errors.password}</p>}
+          <div className="password" style={styles.field} onMouseEnter={(e) => (e.currentTarget.style.border = "1px solid black")}
+            onMouseLeave={(e) => (e.currentTarget.style.border = "1px solid white")}>
+            <label htmlFor="password" style={styles.label}>PASSWORD</label>
+            <input
+              type='password'
+              name='password'
+              value={formData.password}
+              onChange={handleChange}
+              style={styles.input}
+            />
+            {errors.password && <p style={styles.error}>{errors.password}</p>}
+          </div>
 
           <input
             type="submit"
@@ -154,8 +248,8 @@ function Signup() {
             style={styles.button}
           />
         </div>
-        <Link to="/login" style={styles.link}>Already have an account?</Link>
-      </div>
+        <Link to="/signup" style={styles.link}>Reset password</Link>
+        <span style={styles.create}>Already have an account?<Link to="/login" style={styles.link}>Log in</Link></span>      </div>
     </div>
   );
 }
