@@ -1,0 +1,22 @@
+.video-container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.video-title {
+  margin-bottom: 15px;
+  color: #0f0f0f;
+}
+
+.video-player {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.video-not-found {
+  padding: 20px;
+}

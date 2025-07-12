@@ -1,28 +1,43 @@
-import React from 'react';
+import './Video.css';
 
-function Video({ id, title, thumbnail, onClick }) {
+function formatViews(views) {
+  if (views >= 1_000_000) return (views / 1_000_000).toFixed(1) + 'M';
+  if (views >= 1_000) return (views / 1_000).toFixed(1) + 'K';
+  return views.toString();
+}
+
+function timeAgo(old) {
+  const now = new Date();
+  const past = new Date(old);
+  const diff = Math.floor((now - past) / 1000); // in seconds
+
+  const intervals = [
+    { label: 'year', secs: 31536000 },
+    { label: 'month', secs: 2592000 },
+    { label: 'week', secs: 604800 },
+    { label: 'day', secs: 86400 },
+    { label: 'hour', secs: 3600 },
+    { label: 'minute', secs: 60 },
+    { label: 'second', secs: 1 },
+  ];
+
+  for (const interval of intervals) {
+    const count = Math.floor(diff / interval.secs);
+    if (count > 0) return `${count} ${interval.label}${count > 1 ? 's' : ''} ago`;
+  }
+
+  return 'just now';
+}
+
+function Video({ id, title, thumbnail, creator, views, old, onClick }) {
   return (
-    <div
-      onClick={onClick}
-      style={{
-        width: "300px",
-        cursor: "pointer",
-        backgroundColor: "#fff",
-        borderRadius: "10px",
-        overflow: "hidden",
-        boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-        transition: "transform 0.2s",
-      }}
-      onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.03)")}
-      onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-    >
-      <img
-        src={thumbnail}
-        alt={title}
-        style={{ width: "100%", height: "170px", objectFit: "cover" }}
-      />
-      <div style={{ padding: "10px" }}>
-        <h3 style={{ fontSize: "15px", fontWeight: "500", color: "#333", margin: 0 }}>{title}</h3>
+    <div className="video-card" onClick={onClick}>
+      <img src={thumbnail} alt={title} className="video-thumbnail" />
+      <div className="video-details">
+        <h3 className="video-gig-title">{title}</h3>
+        <p className="video-meta">
+          {creator} • {formatViews(views)} views • {timeAgo(old)}
+        </p>
       </div>
     </div>
   );

@@ -10,22 +10,18 @@ function Header() {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: "10px 20px",
-        backgroundColor: "#ffffff",
-        borderBottom: "1px solid #e0e0e0",
-        position: "sticky",
-        top: 0,
-        zIndex: 1000,
+        padding: "0 20px",
+        height: "10%",
       }}
     >
       <h2
-        style={{ margin: 0, color: "#FF0000", cursor: "pointer" }}
+        style={{ margin: '0 20px', color: "#fff", cursor: "pointer" }}
         onClick={() => navigate("/")}
       >
         SZ
       </h2>
 
-      <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "30px" }}>
         <button
           onClick={() => navigate("/upload")}
           style={{

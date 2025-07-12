@@ -1,0 +1,29 @@
+.sidebar {
+  width: 200px;
+  height: 100%;
+  position: sticky;
+  top: 60px;
+  box-shadow: 1px 0 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+}
+
+.menu-item {
+  margin: 10px 0;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 6px;
+  color: #fff;
+  transition: background 0.2s, color 0.2s;
+  text-align: left;
+}
+
+.menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: black;
+}
+
+.active{
+  background-color: rgba(255, 255, 255, 0.9);
+  color: black;
+}

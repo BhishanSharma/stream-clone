@@ -5,12 +5,14 @@ import Login from './pages/Auth/Login'
 import Signup from './pages/Auth/Signup'
 import VideoPlayer from './pages/VideoPlayer/VideoPlayer'
 import UploadPage from './pages/UploadPage/UploadPage'
+import Header from './components/Header'
 
 function App() {
 
   return (
-    <>
+    <div  style={{ backgroundColor: "#000", height:"100vh"}}>
       <Router>
+        <Header/>
         <Routes>
           <Route path='/' element={<Home />}></Route>
           <Route path='/login' element={<Login />}></Route>
@@ -19,7 +21,7 @@ function App() {
           <Route path="/upload" element={<UploadPage />} />
         </Routes>
       </Router>
-    </>
+    </div>
   )
 }
 
