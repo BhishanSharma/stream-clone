@@ -138,6 +138,9 @@ function VideoPlayer() {
           </div>
         </div>
       </div>
+      <div className="recommended-videos">
+        <p>Recommended videos go here</p>
+      </div>
     </div>
   );
 }

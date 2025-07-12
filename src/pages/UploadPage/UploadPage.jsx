@@ -3,6 +3,7 @@ import './UploadPage.css';
 
 function UploadPage() {
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [videoFile, setVideoFile] = useState(null);
   const [imageFile, setImageFile] = useState(null);
 
@@ -37,6 +38,17 @@ function UploadPage() {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            placeholder="e.g. My First Vlog"
+            className="text-input"
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Description</label>
+          <input
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             placeholder="e.g. My First Vlog"
             className="text-input"
           />
