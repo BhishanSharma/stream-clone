@@ -33,37 +33,71 @@ function Login() {
   const styles = {
     body: {
       minHeight: '100vh',
-      backgroundColor: '#f5f5f5',
+      backgroundColor: '#fff',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       fontFamily: 'Arial, sans-serif',
     },
     container: {
-      backgroundColor: '#fff',
-      padding: '32px',
-      borderRadius: '10px',
-      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
       width: '100%',
-      maxWidth: '400px',
+      maxWidth: '25vw',
     },
     header: {
       textAlign: 'center',
-      fontSize: '24px',
-      marginBottom: '20px',
+      fontSize: '36px',
+      marginBottom: '30px',
       color: '#333',
+      fontWeight: 200,
+    },
+    google: {
+      width: '100%',
+      display: 'flex',
+      padding: '10px 0',
+      textAlign: 'center',
+      justifyContent: 'center',
+      color: 'black',
+      fontSize: '20px',
+      fontWeight: '400',
+      border: '1px solid black',
+      borderRadius: '8px',
+      cursor: 'pointer'
+    },
+    span: {
+      display: 'flex',
+      width: '100%',
+      justifyContent: 'center',
+      color: 'black',
+      margin: '20px 0',
+      fontSize: '14px'
     },
     inputBox: {
       display: 'flex',
       flexDirection: 'column',
       gap: '12px',
     },
+    field:{
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '#f5f5f5',
+      borderRadius: '5px',
+      border: '1px solid white',
+      padding: '5px 5px',
+      gap: '5px'
+    },
+    label:{
+      margin: '0 4px',
+      fontSize: '15px',
+      color: 'black'
+    },
     input: {
-      padding: '10px',
+      padding: '5px 0px 3px 5px',
       borderRadius: '6px',
-      border: '1px solid #ccc',
-      fontSize: '14px',
+      fontSize: '18px',
       outline: 'none',
+      border: 'none',
+      backgroundColor: 'transparent',
+      color: 'black'
     },
     error: {
       color: 'red',
@@ -72,60 +106,77 @@ function Login() {
       marginBottom: '4px',
     },
     button: {
-      padding: '10px',
-      backgroundColor: '#0073ff',
+      padding: '15px',
+      backgroundColor: '#000',
       color: '#fff',
       border: 'none',
       borderRadius: '6px',
       fontWeight: 'bold',
-      fontSize: '15px',
-      marginTop: '16px',
+      fontSize: '18px',
+      margin: '16px 0',
       cursor: 'pointer',
     },
     link: {
-      marginTop: '16px',
+      fontSize: '14px',
       display: 'block',
       textAlign: 'center',
-      fontSize: '14px',
       textDecoration: 'none',
       color: '#0073ff',
     },
+    create:{
+      fontSize: '14px',
+      color: 'black',
+      marginTop: '16px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '2px'
+    }
   };
 
   return (
     <div style={styles.body}>
       <div style={styles.container}>
-        <h3 style={styles.header}>SZ</h3>
+        <h3 style={styles.header}>Sign in to SZ</h3>
+        <div style={styles.google}>
+          Continue with Google
+        </div>
+        <span style={styles.span}>or</span>
         <div style={styles.inputBox}>
-          <input
-            type='email'
-            name='email'
-            placeholder='Enter email'
-            value={formData.email}
-            onChange={handleChange}
-            style={styles.input}
-          />
-          {errors.email && <p style={styles.error}>{errors.email}</p>}
-
-          <input
-            type='password'
-            name='password'
-            placeholder='Enter password'
-            value={formData.password}
-            onChange={handleChange}
-            style={styles.input}
-          />
-          {errors.password && <p style={styles.error}>{errors.password}</p>}
+          <div className="email" style={styles.field} onMouseEnter={(e) => (e.currentTarget.style.border = "1px solid black")}
+      onMouseLeave={(e) => (e.currentTarget.style.border = "1px solid white")}>
+            <label htmlFor="email" style={styles.label}>EMAIL</label>
+            <input
+              type='email'
+              name='email'
+              value={formData.email}
+              onChange={handleChange}
+              style={styles.input}
+            />
+            {errors.email && <p style={styles.error}>{errors.email}</p>}
+          </div>
+          <div className="password" style={styles.field} onMouseEnter={(e) => (e.currentTarget.style.border = "1px solid black")}
+      onMouseLeave={(e) => (e.currentTarget.style.border = "1px solid white")}>
+            <label htmlFor="password"style={styles.label}>PASSWORD</label>
+            <input
+              type='password'
+              name='password'
+              value={formData.password}
+              onChange={handleChange}
+              style={styles.input}
+            />
+            {errors.password && <p style={styles.error}>{errors.password}</p>}
+          </div>
 
           <input
             type="submit"
-            value="Login"
+            value="Log in"
             onClick={verifyDetails}
             style={styles.button}
           />
         </div>
-
-        <Link to="/signup" style={styles.link}>Create a new account?</Link>
+        <Link to="/signup" style={styles.link}>Reset password</Link>
+        <span style={styles.create}>No account?<Link to="/signup" style={styles.link}>Create one</Link></span>
       </div>
     </div>
   );
