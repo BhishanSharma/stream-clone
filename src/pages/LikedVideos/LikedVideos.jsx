@@ -38,7 +38,6 @@ function LikedVideos() {
   };
 
   return (
-    <div className="liked-videos-page">
       <div className="liked-videos-container">
         {likedVideos.map((video) => (
           <Video
@@ -53,7 +52,6 @@ function LikedVideos() {
           />
         ))}
       </div>
-    </div>
   );
 }
 

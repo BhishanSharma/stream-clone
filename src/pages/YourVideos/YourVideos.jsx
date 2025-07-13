@@ -38,7 +38,6 @@ function YourVideos() {
   };
 
   return (
-    <div className="your-videos-page">
       <div className="your-videos-container">
         {yourUploadedVideos.map((video) => (
           <Video
@@ -53,7 +52,6 @@ function YourVideos() {
           />
         ))}
       </div>
-    </div>
   );
 }
 

@@ -1,17 +1,10 @@
-.your-videos-page {
-  display: flex;
-  height: 90vh;
-  background-color: #0f0f0f;
-  width: 80%;
-  color: white;
-}
-
 .your-videos-container {
-  flex: 1;
+  width: 80%;
+  height: 100%;
   display: flex;
+  flex: 1;
   flex-wrap: wrap;
   gap: 30px;
-  overflow-y: auto;
+  overflow-y: scroll;
   padding: 30px;
-  box-sizing: border-box;
 }

@@ -1,0 +1,10 @@
+.default-videos-container {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 30px;
+    overflow-y: scroll;
+    padding: 30px;
+}
