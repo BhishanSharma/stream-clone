@@ -1,29 +1,23 @@
 {
   "name": "streaming-zone",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+  "version": "1.0.0",
+  "description": "full-stack application",
+  "homepage": "https://github.com/BhishanSharma/stream-clone#readme",
+  "bugs": {
+    "url": "https://github.com/BhishanSharma/stream-clone/issues"
   },
-  "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.3",
-    "yup": "^1.6.1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BhishanSharma/stream-clone.git"
+  },
+  "license": "ISC",
+  "author": "BhishanSharma",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix Backend\" \"npm run dev --prefix Frontend\""
   },
   "devDependencies": {
-    "@eslint/js": "^9.30.1",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "@vitejs/plugin-react": "^4.6.0",
-    "eslint": "^9.30.1",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
-    "globals": "^16.3.0",
-    "vite": "^7.0.3"
+    "concurrently": "^9.2.0"
   }
 }
