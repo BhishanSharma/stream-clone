@@ -24,7 +24,6 @@ const historyVideos = [
 function History() {
   return (
     <div className="history-page">
-      <Sidebar />
       <div className="history-content">
         <h2 className="history-heading">Watch History</h2>
         {historyVideos.map((video) => (

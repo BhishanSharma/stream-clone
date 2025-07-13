@@ -39,7 +39,6 @@ function Playlists() {
 
   return (
     <div className="playlists-page">
-      <Sidebar />
       <div className="playlists-container">
         {playlistVideos.map((video) => (
           <Video

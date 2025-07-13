@@ -39,7 +39,6 @@ function YourVideos() {
 
   return (
     <div className="your-videos-page">
-      <Sidebar />
       <div className="your-videos-container">
         {yourUploadedVideos.map((video) => (
           <Video

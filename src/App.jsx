@@ -11,24 +11,27 @@ import History from './pages/History/History'
 import Playlists from './pages/Playlists/Playlists'
 import YourVideos from './pages/YourVideos/YourVideos'
 import LikedVideos from './pages/LikedVideos/LikedVideos'
+import DefaultVideos from './pages/DefaultVideos/DefaultVideos'
 
 function App() {
 
   return (
-    <div  style={{ backgroundColor: "#000", height:"100vh"}}>
+    <div style={{ backgroundColor: "#000", height: "100vh" }}>
       <Router>
-        <Header/>
+        <Header />
         <Routes>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/subscriptions' element={<Subscriptions />}></Route>
-          <Route path='/history' element={<History />}></Route>
-          <Route path='/playlists' element={<Playlists />}></Route>
-          <Route path='/yourvideos' element={<YourVideos />}></Route>
-          <Route path='/likedvideos' element={<LikedVideos />}></Route>
+          <Route path="/" element={<Home />}>
+            <Route index element={<DefaultVideos />} />
+            <Route path="subscriptions" element={<Subscriptions />} />
+            <Route path="history" element={<History />} />
+            <Route path="playlists" element={<Playlists />} />
+            <Route path="yourvideos" element={<YourVideos />} />
+            <Route path="likedvideos" element={<LikedVideos />} />
+          </Route>
 
           <Route path='/login' element={<Login />}></Route>
           <Route path='/signup' element={<Signup />}></Route>
-          
+
           <Route path="/watch/:id" element={<VideoPlayer />} />
           <Route path="/upload" element={<UploadPage />} />
         </Routes>

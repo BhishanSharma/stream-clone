@@ -1,6 +1,7 @@
 .history-page {
+  width: 80%;
   display: flex;
-  height: 100vh;
+  height: 90vh;
   background-color: #0f0f0f;
   color: white;
 }

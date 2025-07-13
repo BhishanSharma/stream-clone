@@ -39,7 +39,6 @@ function LikedVideos() {
 
   return (
     <div className="liked-videos-page">
-      <Sidebar />
       <div className="liked-videos-container">
         {likedVideos.map((video) => (
           <Video
