@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 const signupSchema = Yup.object().shape({
   name: Yup.string().min(3, "Name too short").required("Name is required"),
@@ -10,6 +11,19 @@ const signupSchema = Yup.object().shape({
 });
 
 function Signup() {
+
+  useEffect(() => {
+    try {
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+      console.log(storedUser);
+      if (storedUser != null) {
+        console.log(storedUser);
+        navigate("/");
+      }
+    } catch {
+    }
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -31,16 +45,44 @@ function Signup() {
   const submitDetails = async () => {
     try {
       await signupSchema.validate(formData, { abortEarly: false });
-      console.log("Signup successful!", formData);
-      // proceed with API call
-    } catch (validationError) {
-      const formErrors = {};
-      validationError.inner.forEach((err) => {
-        formErrors[err.path] = err.message;
-      });
-      setErrors(formErrors);
+
+      const form = new FormData();
+      form.append("fullname", formData.name);
+      form.append("username", formData.name.toLowerCase());
+      form.append("email", formData.email);
+      form.append("password", formData.password);
+      form.append("avatar", formData.avatar);
+
+      const res = await axios.post(
+        "http://localhost:5000/api/v1/users/register",
+        form,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      // Save token or user details if needed
+      console.log("Signup success:", res.data);
+
+      // Optional: redirect to login or home
+      navigate("/login");
+    } catch (error) {
+      if (error.name === "ValidationError") {
+        const formErrors = {};
+        error.inner.forEach((err) => {
+          formErrors[err.path] = err.message;
+        });
+        setErrors(formErrors);
+      } else if (error.response) {
+        alert(error.response.data.message || "Signup failed");
+      } else {
+        console.error("Signup error:", error);
+      }
     }
   };
+
 
   const styles = {
     body: {

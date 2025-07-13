@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Yup from 'yup';
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email is required'),
@@ -8,6 +10,20 @@ const loginSchema = Yup.object().shape({
 });
 
 function Login() {
+
+  useEffect(() => {
+    try {
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+      console.log(storedUser);
+      if(storedUser != null){
+        console.log(storedUser);
+        navigate("/");
+      }
+    } catch {
+    }
+  }, []);
+
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
 
@@ -19,16 +35,36 @@ function Login() {
   const verifyDetails = async () => {
     try {
       await loginSchema.validate(formData, { abortEarly: false });
-      console.log("Login successful!", formData);
-      // proceed with login logic here
+
+      const response = await axios.post(
+        'http://localhost:5000/api/v1/users/login',
+        {
+          email: formData.email,
+          password: formData.password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+
+      localStorage.setItem("user", JSON.stringify(response.data.data.user));
+      console.log('✅ Login successful:', response.data);
+      console.log(JSON.parse(localStorage.getItem("user")));
+      window.location.reload();
     } catch (validationError) {
-      const formErrors = {};
-      validationError.inner.forEach((err) => {
-        formErrors[err.path] = err.message;
-      });
-      setErrors(formErrors);
+      if (validationError.name === 'ValidationError') {
+        const formErrors = {};
+        validationError.inner.forEach((err) => {
+          formErrors[err.path] = err.message;
+        });
+        setErrors(formErrors);
+      } else {
+        console.error('❌ Login error:', validationError);
+        alert("Login failed! Check your credentials.");
+      }
     }
   };
+
 
   const styles = {
     body: {
@@ -76,7 +112,7 @@ function Login() {
       flexDirection: 'column',
       gap: '12px',
     },
-    field:{
+    field: {
       display: 'flex',
       flexDirection: 'column',
       backgroundColor: '#f5f5f5',
@@ -85,7 +121,7 @@ function Login() {
       padding: '5px 5px',
       gap: '5px'
     },
-    label:{
+    label: {
       margin: '0 4px',
       fontSize: '15px',
       color: 'black'
@@ -123,7 +159,7 @@ function Login() {
       textDecoration: 'none',
       color: '#0073ff',
     },
-    create:{
+    create: {
       fontSize: '14px',
       color: 'black',
       marginTop: '16px',
@@ -140,7 +176,7 @@ function Login() {
         <h3 style={styles.header}>Sign in to SZ</h3>
         <div style={styles.inputBox}>
           <div className="email" style={styles.field} onMouseEnter={(e) => (e.currentTarget.style.border = "1px solid black")}
-      onMouseLeave={(e) => (e.currentTarget.style.border = "1px solid white")}>
+            onMouseLeave={(e) => (e.currentTarget.style.border = "1px solid white")}>
             <label htmlFor="email" style={styles.label}>EMAIL</label>
             <input
               type='email'
@@ -152,8 +188,8 @@ function Login() {
             {errors.email && <p style={styles.error}>{errors.email}</p>}
           </div>
           <div className="password" style={styles.field} onMouseEnter={(e) => (e.currentTarget.style.border = "1px solid black")}
-      onMouseLeave={(e) => (e.currentTarget.style.border = "1px solid white")}>
-            <label htmlFor="password"style={styles.label}>PASSWORD</label>
+            onMouseLeave={(e) => (e.currentTarget.style.border = "1px solid white")}>
+            <label htmlFor="password" style={styles.label}>PASSWORD</label>
             <input
               type='password'
               name='password'

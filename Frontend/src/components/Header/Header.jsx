@@ -1,8 +1,43 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 function Header() {
   const navigate = useNavigate();
+  const [profilePic, setProfilePic] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/v1/users/current-user", {
+          withCredentials: true,
+        });
+
+        setProfilePic(res.data?.data?.avatar || "https://i.pravatar.cc/36"); // fallback
+      } catch (err) {
+        console.error("❌ Error fetching user profile:", err);
+        setProfilePic("https://i.pravatar.cc/36");
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  const logout = async () => {
+    try {
+      await axios.post(
+        "http://localhost:5000/api/v1/users/logout",
+        {},
+        { withCredentials: true }
+      );
+
+      localStorage.removeItem("user"); // clear localStorage
+      window.location.reload();        // full reload to reset auth
+    } catch (err) {
+      console.error("❌ Logout failed:", err);
+      alert("Logout failed. Try again.");
+    }
+  };
 
   return (
     <div
@@ -37,8 +72,23 @@ function Header() {
           Upload
         </button>
 
+        <button
+          onClick={() => logout()}
+          style={{
+            padding: "8px 16px",
+            backgroundColor: "#FF0000",
+            color: "#fff",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+            fontWeight: "bold",
+          }}
+        >
+          Logout
+        </button>
+
         <img
-          src="https://i.pravatar.cc/36"
+          src={profilePic}
           alt="Profile"
           style={{
             width: "36px",
