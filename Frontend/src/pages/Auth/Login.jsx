@@ -138,10 +138,6 @@ function Login() {
     <div style={styles.body}>
       <div style={styles.container}>
         <h3 style={styles.header}>Sign in to SZ</h3>
-        <div style={styles.google}>
-          Continue with Google
-        </div>
-        <span style={styles.span}>or</span>
         <div style={styles.inputBox}>
           <div className="email" style={styles.field} onMouseEnter={(e) => (e.currentTarget.style.border = "1px solid black")}
       onMouseLeave={(e) => (e.currentTarget.style.border = "1px solid white")}>
