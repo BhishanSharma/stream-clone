@@ -7,8 +7,8 @@ function formatViews(views) {
 }
 
 function timeAgo(old) {
-  const now = new Date();
-  const past = new Date(old);
+  const now = Date.now(); // in ms
+  const past = Date.parse(old); // also in ms
   const diff = Math.floor((now - past) / 1000); // in seconds
 
   const intervals = [

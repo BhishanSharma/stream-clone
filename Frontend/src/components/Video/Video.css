@@ -1,4 +1,5 @@
 .video-card {
+  height: 70%;
   width: 48%;
   cursor: pointer;
   border-radius: 10px;
