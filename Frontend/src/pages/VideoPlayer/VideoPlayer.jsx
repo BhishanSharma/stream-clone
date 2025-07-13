@@ -1,27 +1,7 @@
 import { useParams } from 'react-router-dom';
 import './VideoPlayer.css';
 import { useRef, useState, useEffect } from 'react';
-
-const allVideos = [
-  {
-    id: 1,
-    title: "React Basics",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
-    creator: "Bhishan Sharma",
-    views: 5200,
-    createdAt: "2024-07-09T12:00:00Z",
-    description: "Learn React basics in under 10 minutes with this beginner-friendly guide!"
-  },
-  {
-    id: 2,
-    title: "Advanced React",
-    videoUrl: "https://www.w3schools.com/html/movie.mp4",
-    creator: "Bhishan Sharma",
-    views: 15400,
-    createdAt: "2024-07-07T10:30:00Z",
-    description: "Dive deeper into advanced concepts like hooks, context API, and performance tuning."
-  },
-];
+import axios from 'axios';
 
 function formatViews(views) {
   if (views >= 1_000_000) return (views / 1_000_000).toFixed(1) + 'M';
@@ -49,16 +29,33 @@ function timeAgo(dateString) {
 
 function VideoPlayer() {
   const { id } = useParams();
-  const video = allVideos.find(v => v.id === parseInt(id));
   const videoRef = useRef(null);
 
-  const [comment, setComment] = useState("");
+  const [videoData, setVideoData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    const vid = videoRef.current;
-    if (vid) vid.play();
-  }, []);
+    const fetchVideo = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/api/v1/videos/${id}/stream`);
+        if (res.data.success) {
+          setVideoData(res.data);
+        }
+      } catch (err) {
+        console.error("❌ Error loading video stream:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchVideo();
+  }, [id]);
+
+  useEffect(() => {
+    if (videoRef.current) videoRef.current.play();
+  }, [videoData]);
 
   const handleAddComment = () => {
     if (comment.trim()) {
@@ -67,7 +64,10 @@ function VideoPlayer() {
     }
   };
 
-  if (!video) return <h2 className="video-not-found">Video not found</h2>;
+  if (loading) return <h2 className="video-not-found">Loading...</h2>;
+  if (!videoData) return <h2 className="video-not-found">Video not found</h2>;
+
+  const { hls_stream_url, title, thumbnail_url, description, duration } = videoData;
 
   return (
     <div className="video-page">
@@ -76,25 +76,26 @@ function VideoPlayer() {
           <video
             ref={videoRef}
             className="video-player"
-            src={video.videoUrl}
+            src={hls_stream_url}
             controls
             autoPlay
+            poster={thumbnail_url}
           />
         </div>
 
-        <h2 className="video-title">{video.title}</h2>
+        <h2 className="video-title">{title}</h2>
 
         <div className="video-info">
           <div className="channel-info">
             <div className="creator-icon">B</div>
             <div>
-              <h4 className="creator-name">{video.creator}</h4>
+              <h4 className="creator-name">Creator</h4>
               <button className="subscribe-button">Subscribe</button>
             </div>
           </div>
 
           <div className="video-stats">
-            <span>{formatViews(video.views)} views • {timeAgo(video.createdAt)}</span>
+            <span>{formatViews(10000)} views • {timeAgo(new Date().toISOString())}</span>
             <div className="video-actions">
               <button>👍 Like</button>
               <button>🔗 Share</button>
@@ -103,7 +104,7 @@ function VideoPlayer() {
           </div>
         </div>
 
-        <p className="video-description">{video.description}</p>
+        <p className="video-description">{description}</p>
 
         <div className="comments-section">
           <h3>{comments.length} Comments</h3>
@@ -138,6 +139,7 @@ function VideoPlayer() {
           </div>
         </div>
       </div>
+
       <div className="recommended-videos">
         <p>Recommended videos go here</p>
       </div>
