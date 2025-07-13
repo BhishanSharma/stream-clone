@@ -1,4 +1,4 @@
-import Video from "../../components/Video.jsx";
+import Video from "../../components/Video/Video.jsx";
 import { useNavigate } from 'react-router-dom';
 import { videos } from "../Home/data.js";
 import "./DefaultVideos.css"

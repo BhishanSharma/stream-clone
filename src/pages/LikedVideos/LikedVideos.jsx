@@ -1,5 +1,4 @@
-import Sidebar from "../../components/Sidebar.jsx";
-import Video from "../../components/Video.jsx";
+import Video from "../../components/Video/Video.jsx";
 import { useNavigate } from "react-router-dom";
 import './LikedVideos.css';
 
