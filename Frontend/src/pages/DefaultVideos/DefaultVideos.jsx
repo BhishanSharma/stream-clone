@@ -15,6 +15,7 @@ function DefaultVideos() {
         const res = await axios.get("http://localhost:5000/api/v1/videos/getAll", {
           withCredentials: true,
         });
+        console.log(res.data?.data);
 
         setVideos(res.data?.data || []);
       } catch (error) {

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Yup from 'yup';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const signupSchema = Yup.object().shape({
   name: Yup.string().min(3, "Name too short").required("Name is required"),
@@ -11,7 +12,7 @@ const signupSchema = Yup.object().shape({
 });
 
 function Signup() {
-
+  const navigate = useNavigate();
   useEffect(() => {
     try {
       const storedUser = JSON.parse(localStorage.getItem("user"));

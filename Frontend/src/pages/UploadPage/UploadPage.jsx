@@ -7,7 +7,7 @@ function UploadPage() {
   const [description, setDescription] = useState('');
   const [videoFile, setVideoFile] = useState(null);
   const [imageFile, setImageFile] = useState(null);
-  const [loading, setLoading] = useState(false); // ✅ FIXED
+  const [loading, setLoading] = useState(false);
 
   const handleUpload = async (e) => {
     e.preventDefault();
@@ -15,6 +15,7 @@ function UploadPage() {
       alert("Please fill in all fields and select both files.");
       return;
     }
+    console.log(title, description, videoFile, imageFile);
 
     const formData = new FormData();
     formData.append("title", title);

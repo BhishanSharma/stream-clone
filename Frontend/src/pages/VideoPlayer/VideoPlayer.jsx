@@ -39,7 +39,10 @@ function VideoPlayer() {
   useEffect(() => {
     const fetchVideo = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/v1/videos/${id}/stream`);
+        const res = await axios.get(`http://localhost:5000/api/v1/videos/${id}/stream`, {
+          withCredentials: true,
+        });
+        
         if (res.data.success) {
           setVideoData(res.data);
         }
